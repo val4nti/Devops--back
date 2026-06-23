@@ -25,7 +25,7 @@ public class VentaController {
 
     @Operation(summary = "Crear una nueva venta", description = "Crea una nueva venta en el sistema")
     @PostMapping
-    public ResponseEntity<Venta> crearVenta(@Valid @RequestBody Venta venta){
+    public ResponseEntity<Venta> crearVenta(@Valid @RequestBody Venta venta) {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idVenta}")
@@ -37,14 +37,15 @@ public class VentaController {
 
     @PutMapping("/{idVenta}")
     @Operation(summary = "Actualizar una venta existente", description = "Actualiza los detalles de una venta existente")
-    public ResponseEntity<Venta> actualizarVenta(@Valid @PathVariable Long idVenta, @RequestBody Venta venta) throws VentaNotFoundException {
+    public ResponseEntity<Venta> actualizarVenta(@Valid @PathVariable Long idVenta, @RequestBody Venta venta)
+            throws VentaNotFoundException {
         Venta ventaActualizada = ventaService.updateVenta(idVenta, venta);
         return ResponseEntity.ok(ventaActualizada);
     }
 
     @GetMapping
     @Operation(summary = "Obtener todas las ventas", description = "Devuelve una lista de todas las ventas")
-    public ResponseEntity<List<Venta>> getVentas(){
+    public ResponseEntity<List<Venta>> getVentas() {
         return ResponseEntity.ok(ventaService.findAllVentas());
     }
 
@@ -62,5 +63,3 @@ public class VentaController {
         return ResponseEntity.noContent().build(); // Respuesta 204 No Content si se elimina correctamente
     }
 }
-
-
